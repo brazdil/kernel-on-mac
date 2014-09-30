@@ -45,7 +45,9 @@ if [ ! -d "$MAKE_BIN_DIR" ]
 then
   mkdir -p "$MAKE_BIN_DIR"
 
+  ln -s "$TOOL_AWK" "$MAKE_BIN_DIR/awk"
   ln -s "$TOOL_SED" "$MAKE_BIN_DIR/sed"
+  ln -s "$TOOL_XARGS" "$MAKE_BIN_DIR/xargs"
 fi
 
 # Invoke GNU Make
