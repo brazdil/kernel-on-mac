@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-# Load config file
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $SCRIPT_DIR/config.inc
-
 MAKE_BIN_DIR=$SCRIPT_DIR/bin
 MAKE_INCLUDE_DIR=$SCRIPT_DIR/include
 
+# Load config file
+
+source $SCRIPT_DIR/config.inc
+
 # Prepare headers for native tools
+
 if [ ! -d "$MAKE_INCLUDE_DIR" ]
 then
   mkdir -p "$MAKE_INCLUDE_DIR"
@@ -41,19 +43,18 @@ then
 fi
 
 # Create GNU tools symlinks
-if [ ! -d "$MAKE_BIN_DIR" ]
-then
-  mkdir -p "$MAKE_BIN_DIR"
 
-  ln -s "$TOOL_AWK" "$MAKE_BIN_DIR/awk"
-  ln -s "$TOOL_CHOWN" "$MAKE_BIN_DIR/chown"
-  ln -s "$TOOL_DATE" "$MAKE_BIN_DIR/date"
-  ln -s "$TOOL_FIND" "$MAKE_BIN_DIR/find"
-  ln -s "$TOOL_SED" "$MAKE_BIN_DIR/sed"
-  ln -s "$TOOL_XARGS" "$MAKE_BIN_DIR/xargs"
-fi
+rm -rf "$MAKE_BIN_DIR" && mkdir -p "$MAKE_BIN_DIR"
+
+ln -s "$TOOL_AWK" "$MAKE_BIN_DIR/awk"
+ln -s "$TOOL_CHOWN" "$MAKE_BIN_DIR/chown"
+ln -s "$TOOL_DATE" "$MAKE_BIN_DIR/date"
+ln -s "$TOOL_FIND" "$MAKE_BIN_DIR/find"
+ln -s "$TOOL_SED" "$MAKE_BIN_DIR/sed"
+ln -s "$TOOL_XARGS" "$MAKE_BIN_DIR/xargs"
 
 # Invoke GNU Make
+
 export PATH="$MAKE_BIN_DIR":"$PATH"
 make ARCH=$MAKE_ARCH \
      CROSS_COMPILE=$GCC_LINUX_BIN_DIR/$GCC_LINUX_PREFIX \
