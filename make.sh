@@ -46,6 +46,9 @@ then
   mkdir -p "$MAKE_BIN_DIR"
 
   ln -s "$TOOL_AWK" "$MAKE_BIN_DIR/awk"
+  ln -s "$TOOL_CHOWN" "$MAKE_BIN_DIR/chown"
+  ln -s "$TOOL_DATE" "$MAKE_BIN_DIR/date"
+  ln -s "$TOOL_FIND" "$MAKE_BIN_DIR/find"
   ln -s "$TOOL_SED" "$MAKE_BIN_DIR/sed"
   ln -s "$TOOL_XARGS" "$MAKE_BIN_DIR/xargs"
 fi
@@ -53,7 +56,7 @@ fi
 # Invoke GNU Make
 export PATH="$MAKE_BIN_DIR":"$PATH"
 make ARCH=$MAKE_ARCH \
-     CROSS_COMPILE=$COMPILER_BIN_DIR/$COMPILER_PREFIX \
-     HOSTCC="gcc -I$MAKE_INCLUDE_DIR" \
+     CROSS_COMPILE=$GCC_LINUX_BIN_DIR/$GCC_LINUX_PREFIX \
+     HOSTCC="$MAKE_HOST_GCC -I$MAKE_INCLUDE_DIR" \
      SHELL="`which bash`" \
      $@
