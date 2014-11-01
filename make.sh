@@ -35,7 +35,7 @@ then
                linux/elf.h \
                linux/elf-em.h
   do
-    ln -s "$COMPILER_INCLUDE_DIR/$hfile" "$MAKE_INCLUDE_DIR/$hfile"
+    ln -s "$GCC_LINUX_INCLUDE_DIR/$hfile" "$MAKE_INCLUDE_DIR/$hfile"
   done
 
   # Create endian.h which includes the native header
